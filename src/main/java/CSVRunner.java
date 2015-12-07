@@ -13,7 +13,9 @@ public class CSVRunner {
     }
 
     public static void main(String[] args) {
-        ExcelReader.readOddTypesFromExcel(selectDirectory("email_list/nodups.xslx"));
+
+
+        ExcelReader.readOddTypesFromExcel("C:\\Users\\Gebruiker\\Desktop\\email_list\\nodups.xlsx");
     }
 
     private static String selectDirectory(String path) {
