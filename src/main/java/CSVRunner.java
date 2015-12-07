@@ -13,7 +13,7 @@ public class CSVRunner {
     }
 
     public static void main(String[] args) {
-        ExcelReader.readOddTypesFromExcel(selectDirectory("email_list/"));
+        ExcelReader.readOddTypesFromExcel(selectDirectory("email_list/nodups.xslx"));
     }
 
     private static String selectDirectory(String path) {
