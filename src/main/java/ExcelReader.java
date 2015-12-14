@@ -1,18 +1,24 @@
+import org.apache.commons.validator.EmailValidator;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.io.FileInputStream;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * http://mxtoolbox.com/SuperToolX.aspx
+ */
 public class ExcelReader {
 
-    public static Map<String, String> readOddTypesFromExcel(String path){
+    public static List<String> readDuplicateEmailsFromExcel(String path){
 
-        Map<String, String> oddIdesMap = new HashMap<String, String>();
+        List<String> duplicateEmails = new ArrayList<String>();
 
         try {
             XSSFWorkbook workBook = new XSSFWorkbook(new FileInputStream(path));
@@ -21,16 +27,21 @@ public class ExcelReader {
             int first = sheet.getFirstRowNum();
             int last = sheet.getLastRowNum();
 
+            OwnEmailValidator validator = new OwnEmailValidator();
+
             DataFormatter df = new DataFormatter();
-            for(int i = first + 1; i < last; i++){
+            for(int i = first; i < last; i++){
 
                 XSSFRow row = (XSSFRow) sheet.getRow(i);
                 XSSFCell cell_2 = row.getCell(2);
                 String value = df.formatCellValue(cell_2);
-                XSSFCell cell_1 = row.getCell(1);
-                String value_1 = df.formatCellValue(cell_1);
-                if (!oddIdesMap.containsKey(value)) {
-                    oddIdesMap.put(value, value_1);
+
+                if(!validator.validate(value) && !value.equals("")) {
+                    System.out.println(value);
+                }
+
+                if (!duplicateEmails.contains(value)) {
+                    duplicateEmails.add(value);
                 }
             }
 
@@ -40,15 +51,18 @@ public class ExcelReader {
             System.out.println(e.getMessage());
         }
 
-        return oddIdesMap;
+        return duplicateEmails;
     }
 
-    public static Map<String, Map<String, String>> readOddOutcomesFromExcel(String path){
+    public static List<String> removeDuplicatesAndValidateExcel(String path, List<String> getDuplicateEmails){
 
-        Map<String, Map<String, String>> oddIdesMap = new HashMap<String, Map<String, String>>();
+        List<String> removedEmails = new ArrayList<String>();
 
         try {
-            XSSFWorkbook workBook = new XSSFWorkbook(new FileInputStream(path));
+            FileInputStream fis = new FileInputStream(path);
+            XSSFWorkbook workBook = new XSSFWorkbook(fis);
+
+            OwnEmailValidator validator = new OwnEmailValidator();
 
             for (int i = 0; i < workBook.getNumberOfSheets(); i++) {
                 Sheet sheet = workBook.getSheetAt(i);
@@ -56,35 +70,47 @@ public class ExcelReader {
                 int first = sheet.getFirstRowNum();
                 int last = sheet.getLastRowNum();
 
-                Map<String, String> outcomesMap;
-
                 DataFormatter df = new DataFormatter();
-                for(int j = first + 1; j < last - 1; j++){
+                for(int j = first + 1; j < last; j++){
 
                     XSSFRow row = (XSSFRow) sheet.getRow(j);
-                    XSSFCell cell_0 = row.getCell(0);
-                    String value = df.formatCellValue(cell_0);
-                    XSSFCell cell_4 = row.getCell(2);
-                    String value_4 = df.formatCellValue(cell_4);
-                    XSSFCell cell_6 = row.getCell(3);
-                    String value_6 = df.formatCellValue(cell_6);
-                    if (oddIdesMap.containsKey(value)) {
-                        outcomesMap = oddIdesMap.get(value);
-                    } else {
-                        outcomesMap = new HashMap<String, String>();
-                    }
+                    XSSFCell cell_10 = row.getCell(10);
+                    String value10 = df.formatCellValue(cell_10);
 
-                    outcomesMap.put(value_4, value_6);
-                    oddIdesMap.put(value, outcomesMap);
+                    removeCellData(value10, cell_10, getDuplicateEmails, validator, removedEmails);
+
+                    XSSFCell cell_11 = row.getCell(11);
+                    String value11 = df.formatCellValue(cell_11);
+
+                    removeCellData(value11, cell_11, getDuplicateEmails, validator, removedEmails);
 
                 }
             }
+
+            fis.close();
+
+            // update excel file
+            FileOutputStream outFile =new FileOutputStream(new File(path));
+            workBook.write(outFile);
+            outFile.close();
 
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
-        return oddIdesMap;
+        return removedEmails;
     }
+
+    private static void removeCellData(String value, XSSFCell cell, List<String> getDuplicateEmails, OwnEmailValidator validator, List<String> removedEmails) {
+        if(getDuplicateEmails.contains(value) && !value.equals("")) {
+            //System.out.println(value);
+            cell.setCellValue("");
+            removedEmails.add(value);
+        } else if((!validator.validate(value) || !validator.isValidEmailAddress(value)) && !value.equals("")) {
+            cell.setCellValue("");
+            System.out.println(value);
+        }
+    }
+
 }
