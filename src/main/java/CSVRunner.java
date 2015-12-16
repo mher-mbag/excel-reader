@@ -14,9 +14,9 @@ public class CSVRunner {
 
     public static void main(String[] args) {
 
-
-        List<String> getDuplicateEmails = ExcelReader.readDuplicateEmailsFromExcel("C:\\Users\\Mher\\Desktop\\email_list\\nodups.xlsx");
-        ExcelReader.removeDuplicatesAndValidateExcel("C:\\Users\\Mher\\Desktop\\email_list\\Lumi.xlsx", getDuplicateEmails);
+        //List<String> getDuplicateEmails = ExcelReader.readDuplicateEmailsFromExcel("C:\\Users\\Mher\\Desktop\\word_list\\nodups.xlsx");
+        //ExcelReader.removeDuplicatesAndValidateExcel("C:\\Users\\Mher\\Desktop\\word_list\\Lumi.xlsx", getDuplicateEmails);
+        WordReader.readWordDocument("C:\\Users\\Mher\\Desktop\\word_list\\sample.docx");
     }
 
     private static String selectDirectory(String path) {
