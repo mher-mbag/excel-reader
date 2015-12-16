@@ -8,7 +8,7 @@
     <artifactId>excel-updater</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <poi-version>3.11</poi-version>
+        <poi-version>3.13</poi-version>
     </properties>
 
     <dependencies>
