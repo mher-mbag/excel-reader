@@ -11,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * https://svn.apache.org/repos/asf/poi/trunk/src/examples/src/org/apache/poi/xwpf/usermodel/SimpleTable.java
+ * http://www.programcreek.com/java-api-examples/index.php?api=org.apache.poi.xwpf.usermodel.XWPFDocument
  * http://www.concretepage.com/apache-api/apache-poi-xwpf-read-ms-word-docx-header-footer-paragraph-table-example
  * Created by Mher on 12/16/2015.
  */
