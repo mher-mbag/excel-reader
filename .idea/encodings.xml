@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/.gitignore" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/CSVRunner.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java/ExcelReader.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
