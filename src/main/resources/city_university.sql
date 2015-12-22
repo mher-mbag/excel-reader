@@ -6,8 +6,8 @@ DROP TABLE IF EXISTS `person`;
 CREATE TABLE `person` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `name` varchar(50) DEFAULT NULL,
-`date_of_birth` longtext,
-`age` varchar(50) DEFAULT NULL,
+`date_of_birth` datetime,
+`age` INT DEFAULT NULL,
 `gender` varchar(50) DEFAULT NULL,
 `nationality` text NOT NULL,
 PRIMARY KEY (`id`)

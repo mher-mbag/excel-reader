@@ -1,9 +1,7 @@
 package com.university.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * Created by Mher on 12/22/2015.
@@ -14,8 +12,13 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    public String name;
-    public String address;
+    private String name;
+    @Column(name = "date_of_birth")
+    private LocalDate birthDate;
+    private String gender;
+    private int age;
+    private String nationality;
+
 
     public long getId() {
         return id;
@@ -33,11 +36,35 @@ public class Person {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
     }
 }

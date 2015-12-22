@@ -1,6 +1,11 @@
 package com.university.main;
 
+import com.university.entity.Person;
+import com.university.repository.BeanConfiguration;
+import com.university.repository.PersonRepository;
 import com.university.util.WordReader;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 
 import java.io.*;
 import java.util.List;
@@ -19,10 +24,17 @@ public class CSVRunner {
 
     public static void main(String[] args) {
 
-        //List<String> getDuplicateEmails = com.university.util.ExcelReader.readDuplicateEmailsFromExcel("C:\\Users\\Mher\\Desktop\\word_list\\nodups.xlsx");
-        //com.university.util.ExcelReader.removeDuplicatesAndValidateExcel("C:\\Users\\Mher\\Desktop\\word_list\\Lumi.xlsx", getDuplicateEmails);
-
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(
+                BeanConfiguration.class);
+        PersonRepository repository = context
+                .getBean(PersonRepository.class);
+        Person person = new Person();
+        person.setAge(10);
+        person.setName("Mher");
+        repository.save(person);
         WordReader.readWordDocument("C:\\Users\\Gebruiker\\Desktop\\word-list\\separate.docx");
+
+        ((AbstractApplicationContext) context).close();
     }
 
     private static String selectDirectory(String path) {
