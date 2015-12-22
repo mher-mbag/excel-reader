@@ -32,8 +32,12 @@ public class WordReader {
                 if("TABLE".equalsIgnoreCase(element.getElementType().name())) {
                     List<XWPFTable> tableList =  element.getBody().getTables();
                     for (XWPFTable table: tableList){
-                        System.out.println("Total Number of Rows of Table:"+table.getNumberOfRows());
+                        System.out.println(table.getNumberOfRows());
                         System.out.println(table.getText());
+//                        List<XWPFTable> innerTables = table.getBody().getTables();
+//                        for (XWPFTable inner: innerTables){
+//                            System.out.println(inner.getText());
+//                        }
                     }
                 }
             }
