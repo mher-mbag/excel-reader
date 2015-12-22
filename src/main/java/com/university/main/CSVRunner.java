@@ -1,4 +1,6 @@
+package com.university.main;
 
+import com.university.util.WordReader;
 
 import java.io.*;
 import java.util.List;
@@ -14,8 +16,8 @@ public class CSVRunner {
 
     public static void main(String[] args) {
 
-        //List<String> getDuplicateEmails = ExcelReader.readDuplicateEmailsFromExcel("C:\\Users\\Mher\\Desktop\\word_list\\nodups.xlsx");
-        //ExcelReader.removeDuplicatesAndValidateExcel("C:\\Users\\Mher\\Desktop\\word_list\\Lumi.xlsx", getDuplicateEmails);
+        //List<String> getDuplicateEmails = com.university.util.ExcelReader.readDuplicateEmailsFromExcel("C:\\Users\\Mher\\Desktop\\word_list\\nodups.xlsx");
+        //com.university.util.ExcelReader.removeDuplicatesAndValidateExcel("C:\\Users\\Mher\\Desktop\\word_list\\Lumi.xlsx", getDuplicateEmails);
 
         WordReader.readWordDocument("C:\\Users\\Gebruiker\\Desktop\\word-list\\sample.docx");
     }

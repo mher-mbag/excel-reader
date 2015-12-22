@@ -1,3 +1,5 @@
+package com.university.util;
+
 import org.apache.commons.validator.EmailValidator;
 
 import javax.mail.internet.AddressException;
