@@ -24,17 +24,19 @@ public class CSVRunner {
 
     public static void main(String[] args) {
 
-        AbstractApplicationContext context = new AnnotationConfigApplicationContext(
-                BeanConfiguration.class);
-        PersonRepository repository = context
-                .getBean(PersonRepository.class);
-        Person person = new Person();
-        person.setAge(10);
-        person.setName("Mher");
-        repository.save(person);
-        WordReader.readWordDocument("C:\\Users\\Gebruiker\\Desktop\\word-list\\separate.docx");
+//        AbstractApplicationContext context = new AnnotationConfigApplicationContext(
+//                BeanConfiguration.class);
+//        PersonRepository repository = context
+//                .getBean(PersonRepository.class);
+//        Person person = new Person();
+//        person.setAge(10);
+//        person.setName("Mher");
+//        repository.save(person);
 
-        ((AbstractApplicationContext) context).close();
+
+        WordReader.readWordDocument("C:\\Users\\Gebruiker\\Desktop\\word-list\\sample.docx");
+
+//        ((AbstractApplicationContext) context).close();
     }
 
     private static String selectDirectory(String path) {
