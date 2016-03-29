@@ -9,10 +9,12 @@ import org.apache.poi.xwpf.usermodel.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.util.Iterator;
 import java.util.List;
 
 /**
+ * http://www.docspal.com/
  * https://svn.apache.org/repos/asf/poi/trunk/src/examples/src/org/apache/poi/xwpf/usermodel/SimpleTable.java
  * http://www.programcreek.com/java-api-examples/index.php?api=org.apache.poi.xwpf.usermodel.XWPFDocument
  * http://www.concretepage.com/apache-api/apache-poi-xwpf-read-ms-word-docx-header-footer-paragraph-table-example
@@ -27,6 +29,9 @@ public class WordReader {
             XWPFDocument xdoc = new XWPFDocument(OPCPackage.open(fis));
 
             Iterator<IBodyElement> bodyElementIterator = xdoc.getBodyElementsIterator();
+
+            FileWriter f0 = new FileWriter("C:\\Users\\Gebruiker\\Desktop\\word-list\\output.txt");
+
             while(bodyElementIterator.hasNext()) {
                 IBodyElement element = bodyElementIterator.next();
                 if("TABLE".equalsIgnoreCase(element.getElementType().name())) {
@@ -51,6 +56,8 @@ public class WordReader {
                                                     if(xwpfiTableCell!=null)
                                                     {
                                                         System.out.println(xwpfiTableCell.getText());
+                                                        f0.write(xwpfiTableCell.getText() + "\n");
+                                                        f0.write(String.format("%n"));
                                                     }
                                                 }
                                             }
