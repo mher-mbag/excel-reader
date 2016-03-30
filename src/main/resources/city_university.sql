@@ -68,25 +68,12 @@ PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `past_positions`;
+DROP TABLE IF EXISTS `positions`;
 CREATE TABLE `past_activities` (
 `id` bigint(20) NOT NULL AUTO_INCREMENT,
 `person_id` bigint(20) NOT NULL,
 `start_date` datetime,
 `end_date` datetime,
-`organization` varchar(50),
-`role` varchar(50),
-`role_description` varchar(50),
-`Committee` varchar(50)
-PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
-
-DROP TABLE IF EXISTS `current_positions`;
-CREATE TABLE `current_positions` (
-`id` bigint(20) NOT NULL AUTO_INCREMENT,
-`person_id` bigint(20) NOT NULL,
-`start_date` datetime,
 `organization` varchar(50),
 `role` varchar(50),
 `role_description` varchar(50),
